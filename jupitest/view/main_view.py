@@ -216,12 +216,12 @@ class MainView(Viewable):
         # == Widgets
         self._body = tk.Frame(self._master)
         self._scrollbox = Scrollbox(self._body)
-        self._scrollbox.build()
+        self._scrollbox.build_pack(expand=1,
+                                   fill=tk.BOTH)
         self._tree = Tree(self._scrollbox.box, self)
-        self._tree.build()
-        # == Layout
-        self._scrollbox.body.pack(expand=1, fill=tk.BOTH)
-        self._tree.body.pack(expand=1, fill=tk.BOTH, padx=(5, 50), pady=(5, 50))
+        self._tree.build_pack(expand=1,
+                              fill=tk.BOTH,
+                              padx=(5, 50), pady=(5, 50))
 
     def _on_display(self):
         self._tree.insert(title="tests",

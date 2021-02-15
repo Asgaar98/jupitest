@@ -2,6 +2,7 @@ import os
 import os.path
 import unittest
 import time
+from pyrustic.manager import constant
 
 
 class MainHost:
@@ -12,7 +13,9 @@ class MainHost:
         self._result_builder = result_builder
         self._is_running = False
         self._running_test = dict()
+        self._setup()
         self._reloader.save_state()
+
 
     def count_tests(self, path, class_name=None, method_name=None, test_loader=None):
         self._reloader.restore_state()
@@ -126,6 +129,19 @@ class MainHost:
             self._running_test[test_id]["result"].stop()
         except Exception as e:
             pass
+
+    def _setup(self):
+        shared_folder = os.path.join(constant.PYRUSTIC_DATA_FOLDER, "jupitest")
+        shared_json_path = os.path.join(shared_folder,
+                                        "jupitest_shared_data.json")
+        if not os.path.exists(shared_folder):
+            os.makedirs(shared_folder)
+        if not os.path.exists(shared_json_path):
+            default_json = pkgutil.get_data("jupitest",
+                                            "misc/default_shared_data.json")
+            with open(shared_json_path, "wb") as file:
+                file.write(default_json)
+        self._jasonix = Jasonix(shared_json_path)
 
     def _flatten_suite(self, suite, result):
         if hasattr(suite, "__iter__"):

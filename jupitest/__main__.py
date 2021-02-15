@@ -1,11 +1,10 @@
 from pyrustic.app import App
-from jupitest import about
 from jupitest.misc.builder import MainViewBuilder
 from jupitest.misc import my_theme
 
 
 def main():
-    app = App(about.ROOT_DIR)
+    app = App(__package__)
     app.root.title("Jupitest - Pyrustic Test Runner")
     app.theme = my_theme.get_theme()
     app.view = MainViewBuilder().build(app)
