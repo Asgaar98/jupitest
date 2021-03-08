@@ -1,11 +1,12 @@
-from pyrustic.viewable import Viewable
+from pyrustic.view import View
 import math
 import traceback
 import tkinter as tk
 
 
-class Toolbar(Viewable):
+class Toolbar(View):
     def __init__(self, node_id, parent, callback, log_window_builder):
+        super().__init__()
         self._node_id = node_id
         self._parent = parent
         self._callback = callback

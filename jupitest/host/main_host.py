@@ -2,6 +2,8 @@ import os
 import os.path
 import unittest
 import time
+import pkgutil
+from pyrustic.jasonix import Jasonix
 from pyrustic.manager import constant
 
 
@@ -16,8 +18,10 @@ class MainHost:
         self._setup()
         self._reloader.save_state()
 
-
-    def count_tests(self, path, class_name=None, method_name=None, test_loader=None):
+    def count_tests(self, path,
+                    class_name=None,
+                    method_name=None,
+                    test_loader=None):
         self._reloader.restore_state()
         if not os.path.exists(path):
             return

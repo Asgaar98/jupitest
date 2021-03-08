@@ -1,14 +1,16 @@
 from pyrustic.widget.scrollbox import Scrollbox
-from pyrustic.viewable import Viewable
-from jupitest.view.tree import Tree
+from pyrustic.widget.tree import Tree
+from pyrustic.view import View
+from jupitest.view.tree_hook import TreeHook
 import os
 import os.path
 import tkinter as tk
 
 
-class MainView(Viewable):
+class MainView(View):
 
     def __init__(self, app, threadom, host, toolbar_builder, root_path):
+        super().__init__()
         self._app = app
         self._threadom = threadom
         self._host = host
@@ -117,7 +119,8 @@ class MainView(Viewable):
         elif event == "add_unexpected_success":
             toolbar.notify_add_unexpected_success(data["test"])
         elif event == "add_sub_test":
-            toolbar.notify_add_sub_test(data["test"], data["sub_test"], data["outcome"])
+            toolbar.notify_add_sub_test(data["test"],
+                                        data["sub_test"], data["outcome"])
 
     def notify_running_exception(self, exception):
         pass
@@ -128,7 +131,7 @@ class MainView(Viewable):
 
     def on_node_collapsed(self, node):
         self._tree.clear(node["node_id"])
-        node["box_frame"].config(height=1)
+        node["frame_box"].config(height=1)
 
     def on_node_expanded(self, node):
         node_id = node["node_id"]
@@ -136,17 +139,20 @@ class MainView(Viewable):
         path = node["data"]["path"]
 
         if node_type in ("package", "root"):
-            self._threadom.run(self._host.tests_in_directory, args=(path,),
-                        consumer=lambda data, self=self, node_id=node_id:
+            self._threadom.run(self._host.tests_in_directory,
+                               target_args=(path,),
+                               consumer=lambda data, self=self, node_id=node_id:
                         self.fill_directory(node_id, data))
         elif node_type == "module":
-            self._threadom.run(self._host.tests_in_module, args=(path,),
-                           consumer=lambda data, self=self, node_id=node_id:
+            self._threadom.run(self._host.tests_in_module,
+                               target_args=(path,),
+                               consumer=lambda data, self=self, node_id=node_id:
                            self.fill_module(node_id, data))
         elif node_type == "class":
             name = node["data"]["name"]
-            self._threadom.run(self._host.tests_in_class, args=(path, name),
-                           consumer=lambda data, self=self, node_id=node_id:
+            self._threadom.run(self._host.tests_in_class,
+                               target_args=(path, name),
+                               consumer=lambda data, self=self, node_id=node_id:
                            self.fill_class(node_id, data))
 
     def on_title_clicked(self, node, toolbar_parent):
@@ -216,12 +222,14 @@ class MainView(Viewable):
         # == Widgets
         self._body = tk.Frame(self._master)
         self._scrollbox = Scrollbox(self._body)
-        self._scrollbox.build_pack(expand=1,
-                                   fill=tk.BOTH)
-        self._tree = Tree(self._scrollbox.box, self)
-        self._tree.build_pack(expand=1,
+        self._scrollbox.pack(expand=1,
+                             fill=tk.BOTH)
+        self._tree = Tree(self._scrollbox.box,
+                          spacing=20)
+        self._tree.pack(expand=1,
                               fill=tk.BOTH,
                               padx=(5, 50), pady=(5, 50))
+        self._tree.hook = lambda self=self: TreeHook(self)
 
     def _on_display(self):
         self._tree.insert(title="tests",
@@ -253,7 +261,7 @@ class MainView(Viewable):
             method_name = node["data"]["name"]
         data = self._host.count_tests(path, class_name=class_name, method_name=method_name)
         if data is None:
-            self._tree.node(node["parent"])["box_frame"].config(height=1)
+            self._tree.node(node["parent"])["frame_box"].config(height=1)
             self._tree.collapse(node["parent"])
             return
         count_tests, suite = data
@@ -261,8 +269,9 @@ class MainView(Viewable):
         toolbar.count_tests = count_tests
         queue = self._threadom.q()
         self._focused_node[node_id]["queue"] = queue
-        self._threadom.run(self._host.run_suite, args=(node_id, suite, queue),
-                             kwargs={"failfast": failfast})
+        self._threadom.run(self._host.run_suite,
+                           target_args=(node_id, suite, queue),
+                           target_kwargs={"failfast": failfast})
         qid = self._threadom.consume(queue, consumer=self.notify_running_test_event,
                                 exception_handler=self.notify_running_exception)
         self._focused_node[node_id]["qid"] = qid

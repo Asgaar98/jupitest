@@ -6,7 +6,7 @@ from jupitest.host.result import Result
 from jupitest.host.reloader import Reloader
 from jupitest.view.log_window import LogWindow
 from jupitest.view.toolbar import Toolbar
-from jupitest.view.tree import Tree
+from pyrustic.widget.tree import Tree
 from jupitest.view.main_view import MainView
 from pyrustic.manager.misc import funcs
 
@@ -40,8 +40,9 @@ class TreeBuilder:
 
 class MainViewBuilder:
     def build(self, app):
-        jasonix = funcs.get_manager_jasonix()
-        target = jasonix.data["target"]
+        #jasonix = funcs.get_manager_jasonix()
+        #target = jasonix.data["target"]
+        target = os.getcwd()
         tests_path = os.path.join(target, "tests")
         return MainView(app,
                         Threadom(app.root),

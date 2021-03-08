@@ -1,9 +1,10 @@
-from pyrustic.viewable import Viewable
+from pyrustic.view import View
 import tkinter as tk
 
 
-class LogWindow(Viewable):
+class LogWindow(View):
     def __init__(self, master, message):
+        super().__init__()
         self._master = master
         self._message = message
         self._text = None
