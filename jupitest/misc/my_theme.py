@@ -1,6 +1,6 @@
 from pyrustic.theme import Theme
 from pyrustic import default_style
-from tk_cyberpunk_theme import Cyberpunk
+from tk_cyberpunk_theme.main import Cyberpunk
 from tk_cyberpunk_theme import constant
 from tk_cyberpunk_theme.pyrustic_widget import tree
 from tk_cyberpunk_theme.native_widget import label
