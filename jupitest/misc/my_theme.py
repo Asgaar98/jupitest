@@ -14,7 +14,7 @@ def get_theme():
     theme = Cyberpunk()
     theme.add_theme(_get_tree_theme())
     theme.add_theme(_get_toolbar_theme())
-    theme.add_theme(_get_log_window_theme())
+    #theme.add_theme(_get_log_window_theme())
     return theme
 
 
