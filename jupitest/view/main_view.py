@@ -1,13 +1,13 @@
-from pyrustic.widget.scrollbox import Scrollbox
-from pyrustic.widget.tree import Tree
-from pyrustic.view import View
+from megawidget.scrollbox import Scrollbox
+from megawidget.tree import Tree
+from viewable import Viewable
 from jupitest.view.tree_hook import TreeHook
 import os
 import os.path
 import tkinter as tk
 
 
-class MainView(View):
+class MainView(Viewable):
 
     def __init__(self, app, threadom, host, toolbar_builder, root_path):
         super().__init__()
@@ -218,7 +218,7 @@ class MainView(View):
     # ===========================================
     #         VIEWABLE METHODS IMPLEMENTATION
     # ===========================================
-    def _on_build(self):
+    def _build(self):
         # == Widgets
         self._body = tk.Frame(self._master)
         self._scrollbox = Scrollbox(self._body)
@@ -231,7 +231,7 @@ class MainView(View):
                               padx=(5, 50), pady=(5, 50))
         self._tree.hook = lambda self=self: TreeHook(self)
 
-    def _on_display(self):
+    def _on_map(self):
         self._tree.insert(title="tests",
                           data={"path": self._root_path,
                                 "type": "root",

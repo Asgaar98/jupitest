@@ -1,17 +1,17 @@
-from pyrustic.view import View
+from viewable import Viewable
 import tkinter as tk
 
 
-class LogWindow(View):
+class LogWindow(Viewable):
     def __init__(self, master, message):
         super().__init__()
         self._master = master
         self._message = message
         self._text = None
 
-    def _on_build(self):
+    def _build(self):
         self._body = tk.Toplevel()
-        self._body.title("Log - Pyrustic Test Runner")
+        self._body.title("Log")
         scrollbar = tk.Scrollbar(self._body)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self._text = tk.Text(self._body, name="logWindow",
@@ -19,9 +19,9 @@ class LogWindow(View):
         self._text.pack(side=tk.RIGHT, expand=1, fill=tk.BOTH)
         scrollbar.config(command=self._text.yview)
         self._text.config(yscrollcommand=scrollbar.set)
-        return self._body
 
-    def _on_display(self):
+    def _on_map(self):
+        super()._on_map()
         self._text.insert("0.0", self._message)
         self._text.config(state="disabled")
 

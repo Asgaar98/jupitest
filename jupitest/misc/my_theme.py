@@ -1,10 +1,10 @@
-from pyrustic.theme import Theme
-from pyrustic import default_style
-from tk_cyberpunk_theme.main import Cyberpunk
-from tk_cyberpunk_theme import constant
-from tk_cyberpunk_theme.pyrustic_widget import tree
-from tk_cyberpunk_theme.native_widget import label
-from tk_cyberpunk_theme.native_widget import button
+from themebase import Theme
+import stylebase
+from cyberpunk_theme import Cyberpunk
+from cyberpunk_theme import constant
+from cyberpunk_theme.megawidget import tree
+from cyberpunk_theme.widget import label
+from cyberpunk_theme.widget import button
 
 
 # ========================================
@@ -33,14 +33,14 @@ def _get_tree_theme():
 
 # titlebar
 def _get_tree_titlebar_style():
-    style = default_style.Frame()
+    style = stylebase.Frame()
     style.background = constant.COLOR_BLACK
     return style
 
 
 # expander button
 def _get_tree_expander_button_style():
-    style = default_style.Button()
+    style = stylebase.Button()
     style.font = constant.FONT_FAV_BOLD
     style.background = constant.COLOR_BLACK
     style.foreground = "gray"
@@ -55,7 +55,7 @@ def _get_tree_expander_button_style():
 
 # title_one label
 def _get_tree_title_one_label_style():
-    style = default_style.Label()
+    style = stylebase.Label()
     style.font = constant.FONT_FAV_BOLD
     style.background = constant.COLOR_BLACK
     style.foreground = "gray"
@@ -64,7 +64,7 @@ def _get_tree_title_one_label_style():
 
 # title_two label
 def _get_tree_title_two_label_style():
-    style = default_style.Label()
+    style = stylebase.Label()
     style.font = constant.FONT_FAV_BOLD
     style.background = constant.COLOR_BLACK
     style.foreground = "#CFCFCF"
@@ -100,7 +100,7 @@ def _get_toolbar_theme():
 
 # toolbar body
 def _get_toolbar_body_style():
-    style = default_style.Frame()
+    style = stylebase.Frame()
     style.background = "#002323"
     return style
 
@@ -186,7 +186,7 @@ def _get_log_window_theme():
 
 # log window
 def _get_log_window_text_style():
-    style = default_style.Text()
+    style = stylebase.Text()
     style.font = constant.FONT_DEFAULT_FAMILY, 15, "normal"
     style.background = "#033669"
     style.foreground = "#7EB1B1"

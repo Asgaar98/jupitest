@@ -1,5 +1,5 @@
 import tkinter as tk
-from pyrustic.widget.tree import Hook
+from megawidget.tree import Hook
 
 
 class TreeHook(Hook):
@@ -9,7 +9,7 @@ class TreeHook(Hook):
         self._title_one_stringvar = tk.StringVar()
         self._title_two_stringvar = tk.StringVar()
 
-    def on_build_node(self, tree, node, frame):
+    def build_node(self, tree, node, frame):
         self._tree = tree
         self._node = node
         title = node["title"]
@@ -54,7 +54,7 @@ class TreeHook(Hook):
         titlelabel_one.bind("<Button-1>", command)
         titlelabel_two.bind("<Button-1>", command)
 
-    def on_display_node(self, tree, node):
+    def on_map_node(self, tree, node):
         pass
 
     def on_destroy_node(self, tree, node):

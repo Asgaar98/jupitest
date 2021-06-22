@@ -1,10 +1,10 @@
-from pyrustic.view import View
+from viewable import Viewable
 import math
 import traceback
 import tkinter as tk
 
 
-class Toolbar(View):
+class Toolbar(Viewable):
     def __init__(self, node_id, parent, callback, log_window_builder):
         super().__init__()
         self._node_id = node_id
@@ -272,7 +272,7 @@ class Toolbar(View):
     #       VIEWABLE METHODS IMPLEMENTATION
     # ========================================
 
-    def _on_build(self):
+    def _build(self):
         self._body = tk.Frame(self._parent, name="runtestToolbar")
         self._body.grid(pady=5, sticky="w")
         # ============== frames ================
@@ -410,11 +410,6 @@ class Toolbar(View):
         self._install_default_widgets()
         return self._body
 
-    def _on_display(self):
-        pass
-
-    def _on_destroy(self):
-        pass
 
     # ========================================
     #             PRIVATE METHODS
