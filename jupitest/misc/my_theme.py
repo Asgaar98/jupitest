@@ -1,10 +1,8 @@
-from themebase import Theme
-import stylebase
+import tkstyle
 from cyberpunk_theme import Cyberpunk
 from cyberpunk_theme import constant
+from cyberpunk_theme.widget import label, button, frame
 from cyberpunk_theme.megawidget import tree
-from cyberpunk_theme.widget import label
-from cyberpunk_theme.widget import button
 
 
 # ========================================
@@ -12,35 +10,51 @@ from cyberpunk_theme.widget import button
 # ========================================
 def get_theme():
     theme = Cyberpunk()
-    theme.add_theme(_get_tree_theme())
-    theme.add_theme(_get_toolbar_theme())
-    #theme.add_theme(_get_log_window_theme())
+    theme.add(_get_tree_titlebar_style(), pattern="*Tree*")
+    theme.add(_get_tree_expander_button_style(),
+              pattern="*Tree*treeExpanderButton")
+    theme.add(_get_tree_title_one_label_style(),
+              pattern="*Tree*treeTitleLabelOne")
+    theme.add(_get_tree_title_two_label_style(),
+              pattern="*Tree*treeTitleLabelTwo")
+    theme.add(_get_toolbar_body_style(),
+                    pattern="*runtestToolbar*")
+    theme.add(_get_toolbar_label_testing_passed_style(),
+                    pattern="*runtestToolbar*labelTestingPassed")
+    theme.add(_get_toolbar_label_testing_failed_style(),
+                    pattern="*runtestToolbar*labelTestingFailed")
+    theme.add(_get_toolbar_button_run(),
+                    pattern="*runtestToolbar*buttonRun")
+    theme.add(_get_toolbar_button_rerun(),
+                    pattern="*runtestToolbar*buttonRerun")
+    theme.add(_get_toolbar_button_stop(),
+                    pattern="*runtestToolbar*buttonStop")
+    theme.add(_get_toolbar_button_cancel(),
+                    pattern="*runtestToolbar*buttonCancel")
+    theme.add(_get_toolbar_button_clean(),
+                    pattern="*runtestToolbar*buttonClean")
+    theme.add(_get_toolbar_button_log(),
+                    pattern="*runtestToolbar*buttonLog")
+    
+    theme.add(_get_log_window_text_style(), pattern="*Text")
+
     return theme
 
 
 # ========================================
 #                   TREE
 # ========================================
-# == Tree Theme
-def _get_tree_theme():
-    theme = tree.get_theme()
-    theme.add_style(_get_tree_titlebar_style(), scope="*Tree*")
-    theme.add_style(_get_tree_expander_button_style(), scope="*Tree*treeExpanderButton.")
-    theme.add_style(_get_tree_title_one_label_style(), scope="*Tree*treeTitleLabelOne.")
-    theme.add_style(_get_tree_title_two_label_style(), scope="*Tree*treeTitleLabelTwo.")
-    return theme
-
 
 # titlebar
 def _get_tree_titlebar_style():
-    style = stylebase.Frame()
+    style = tree.get_style()
     style.background = constant.COLOR_BLACK
     return style
 
 
 # expander button
 def _get_tree_expander_button_style():
-    style = stylebase.Button()
+    style = tkstyle.Button()
     style.font = constant.FONT_FAV_BOLD
     style.background = constant.COLOR_BLACK
     style.foreground = "gray"
@@ -55,7 +69,7 @@ def _get_tree_expander_button_style():
 
 # title_one label
 def _get_tree_title_one_label_style():
-    style = stylebase.Label()
+    style = tkstyle.Label()
     style.font = constant.FONT_FAV_BOLD
     style.background = constant.COLOR_BLACK
     style.foreground = "gray"
@@ -64,7 +78,7 @@ def _get_tree_title_one_label_style():
 
 # title_two label
 def _get_tree_title_two_label_style():
-    style = stylebase.Label()
+    style = tkstyle.Label()
     style.font = constant.FONT_FAV_BOLD
     style.background = constant.COLOR_BLACK
     style.foreground = "#CFCFCF"
@@ -74,33 +88,10 @@ def _get_tree_title_two_label_style():
 # ========================================
 #            TOOLBAR
 # ========================================
-# == toolbar theme
-def _get_toolbar_theme():
-    theme = Theme()
-    theme.add_style(_get_toolbar_body_style(),
-                    scope="*runtestToolbar*")
-    theme.add_style(_get_toolbar_label_testing_passed_style(),
-                    scope="*runtestToolbar*labelTestingPassed.")
-    theme.add_style(_get_toolbar_label_testing_failed_style(),
-                    scope="*runtestToolbar*labelTestingFailed.")
-    theme.add_style(_get_toolbar_button_run(),
-                    scope="*runtestToolbar*buttonRun.")
-    theme.add_style(_get_toolbar_button_rerun(),
-                    scope="*runtestToolbar*buttonRerun.")
-    theme.add_style(_get_toolbar_button_stop(),
-                    scope="*runtestToolbar*buttonStop.")
-    theme.add_style(_get_toolbar_button_cancel(),
-                    scope="*runtestToolbar*buttonCancel.")
-    theme.add_style(_get_toolbar_button_clean(),
-                    scope="*runtestToolbar*buttonClean.")
-    theme.add_style(_get_toolbar_button_log(),
-                    scope="*runtestToolbar*buttonLog.")
-    return theme
-
 
 # toolbar body
 def _get_toolbar_body_style():
-    style = stylebase.Frame()
+    style = frame.get_style()
     style.background = "#002323"
     return style
 
@@ -177,16 +168,11 @@ def _get_toolbar_button_log():
 # ========================================
 #               LOG WINDOW
 # ========================================
-# == log window theme
-def _get_log_window_theme():
-    theme = Theme()
-    theme.add_style(_get_log_window_text_style(), scope="*Text.")
-    return theme
 
 
 # log window
 def _get_log_window_text_style():
-    style = stylebase.Text()
+    style = tkstyle.Text()
     style.font = constant.FONT_DEFAULT_FAMILY, 15, "normal"
     style.background = "#033669"
     style.foreground = "#7EB1B1"
