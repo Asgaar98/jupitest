@@ -3,8 +3,8 @@ import os.path
 import unittest
 import time
 import pkgutil
-from jayson import Jayson
-from pyrustic.manager import constant
+from shared import Jason
+from backstage import constant
 
 
 class MainHost:
@@ -135,7 +135,7 @@ class MainHost:
             pass
 
     def _setup(self):
-        shared_folder = os.path.join(constant.SHARED_PYRUSTIC_DATA, "jupitest")
+        shared_folder = os.path.join(constant.PYRUSTIC_DATA_PATH, "jupitest")
         shared_json_path = os.path.join(shared_folder,
                                         "jupitest_shared_data.json")
         if not os.path.exists(shared_folder):
@@ -145,7 +145,7 @@ class MainHost:
                                             "misc/default_shared_data.json")
             with open(shared_json_path, "wb") as file:
                 file.write(default_json)
-        self._jasonix = Jayson(shared_json_path)
+        self._jasonix = Jason("jupitest_shared_data", location=shared_folder)
 
     def _flatten_suite(self, suite, result):
         if hasattr(suite, "__iter__"):
