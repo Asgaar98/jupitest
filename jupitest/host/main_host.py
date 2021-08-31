@@ -10,6 +10,7 @@ from backstage import constant
 class MainHost:
 
     def __init__(self, root_path, reloader, result_builder):
+        """ """
         self._root_path = root_path
         self._reloader = reloader
         self._result_builder = result_builder
