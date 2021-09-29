@@ -146,7 +146,7 @@ class MainHost:
                                             "misc/default_shared_data.json")
             with open(shared_json_path, "wb") as file:
                 file.write(default_json)
-        self._jasonix = Jason("jupitest_shared_data", location=shared_folder)
+        self._jasonix = Jason("jupitest_shared_data.json", location=shared_folder)
 
     def _flatten_suite(self, suite, result):
         if hasattr(suite, "__iter__"):

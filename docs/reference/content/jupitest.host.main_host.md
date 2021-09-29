@@ -1,5 +1,5 @@
 
-Back to [Reference Overview](https://github.com/pyrustic/jupitest/blob/master/docs/reference/README.md)
+Back to [Reference Overview](https://github.com/pyrustic/jupitest/blob/master/docs/reference/README.md#readme)
 
 # jupitest.host.main\_host
 
@@ -17,7 +17,7 @@ class MainHost:
 
     def __init__(self, root_path, reloader, result_builder):
         """
-        Initialize self.  See help(type(self)) for accurate signature.
+        
         """
 
     def count_tests(self, path, class_name=None, method_name=None, test_loader=None):
