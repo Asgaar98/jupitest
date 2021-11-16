@@ -48,17 +48,17 @@ def get_theme():
 # titlebar
 def _get_tree_titlebar_style():
     style = tree.get_style()
-    style.background = constant.COLOR_BLACK
+    style.background = constant.BACKGROUND_COLOR
     return style
 
 
 # expander button
 def _get_tree_expander_button_style():
     style = tkstyle.Button()
-    style.font = constant.FONT_FAV_BOLD
-    style.background = constant.COLOR_BLACK
+    style.font = (constant.FONT_FAMILY, constant.FONT_SIZE, "bold")
+    style.background = constant.BACKGROUND_COLOR
     style.foreground = "gray"
-    style.activeForeground = constant.COLOR_BLACK
+    style.activeForeground = constant.BACKGROUND_COLOR
     style.highlightThickness = 0
     style.borderWidth = 0
     style.activeBackground = "#F0F8FF"
@@ -70,8 +70,8 @@ def _get_tree_expander_button_style():
 # title_one label
 def _get_tree_title_one_label_style():
     style = tkstyle.Label()
-    style.font = constant.FONT_FAV_BOLD
-    style.background = constant.COLOR_BLACK
+    style.font = (constant.FONT_FAMILY, constant.FONT_SIZE, "bold")
+    style.background = constant.BACKGROUND_COLOR
     style.foreground = "gray"
     return style
 
@@ -79,8 +79,8 @@ def _get_tree_title_one_label_style():
 # title_two label
 def _get_tree_title_two_label_style():
     style = tkstyle.Label()
-    style.font = constant.FONT_FAV_BOLD
-    style.background = constant.COLOR_BLACK
+    style.font = (constant.FONT_FAMILY, constant.FONT_SIZE, "bold")
+    style.background = constant.BACKGROUND_COLOR
     style.foreground = "#CFCFCF"
     return style
 
@@ -116,11 +116,11 @@ def _get_toolbar_label_testing_failed_style():
 def _get_toolbar_button_run():
     style = button.get_style()
     style.background = "#004600"
-    style.foreground = constant.COLOR_ALMOST_WHITE
+    style.foreground = "white"
     style.activeBackground = "#006600"
-    style.activeForeground = constant.COLOR_ALMOST_WHITE
-    style.highlightBackground = constant.COLOR_ALMOST_WHITE
-    style.highlightColor = constant.COLOR_ALMOST_WHITE
+    style.activeForeground = "white"
+    style.highlightBackground = "white"
+    style.highlightColor = "white"
     return style
 
 
@@ -149,7 +149,7 @@ def _get_toolbar_button_cancel():
 # button clean
 def _get_toolbar_button_clean():
     style = _get_toolbar_button_run()
-    style.background = constant.COLOR_BLACK
+    style.background = constant.BACKGROUND_COLOR
     style.activeBackground = "#FF0000"
     style.foreground = "gray"
     style.borderWidth = 0
@@ -173,7 +173,7 @@ def _get_toolbar_button_log():
 # log window
 def _get_log_window_text_style():
     style = tkstyle.Text()
-    style.font = constant.FONT_DEFAULT_FAMILY, 15, "normal"
+    style.font = constant.FONT_FAMILY, 15, "normal"
     style.background = "#033669"
     style.foreground = "#7EB1B1"
     style.highlightThickness = 0

@@ -136,17 +136,7 @@ class MainHost:
             pass
 
     def _setup(self):
-        shared_folder = os.path.join(constant.PYRUSTIC_DATA_PATH, "jupitest")
-        shared_json_path = os.path.join(shared_folder,
-                                        "jupitest_shared_data.json")
-        if not os.path.exists(shared_folder):
-            os.makedirs(shared_folder)
-        if not os.path.exists(shared_json_path):
-            default_json = pkgutil.get_data("jupitest",
-                                            "misc/default_shared_data.json")
-            with open(shared_json_path, "wb") as file:
-                file.write(default_json)
-        self._jasonix = Jason("jupitest_shared_data.json", location=shared_folder)
+        pass
 
     def _flatten_suite(self, suite, result):
         if hasattr(suite, "__iter__"):

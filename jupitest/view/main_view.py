@@ -1,4 +1,4 @@
-from megawidget.scrollbox import Scrollbox
+from megawidget.scrollbox import ScrollBox
 from megawidget.tree import Tree
 from viewable import Viewable
 from jupitest.view.tree_hook import TreeHook
@@ -221,7 +221,7 @@ class MainView(Viewable):
     def _build(self):
         # == Widgets
         self._body = tk.Frame(self._master)
-        self._scrollbox = Scrollbox(self._body)
+        self._scrollbox = ScrollBox(self._body)
         self._scrollbox.pack(expand=1,
                              fill=tk.BOTH)
         self._tree = Tree(self._scrollbox.box,

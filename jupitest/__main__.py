@@ -1,4 +1,4 @@
-from pyrustic.app import App
+from tkf import App
 from jupitest.misc.builder import MainViewBuilder
 from jupitest.misc import my_theme
 
